@@ -1,0 +1,7 @@
+Vectors are useful as they do not require you to manually allocate space per their dynamic resizing they also have O(1) time complexity for random access making it easy to get to any information through indexing. 
+They have a disadvantage when it comes to their ordering and searching larger data sets.
+Hash tables are more advantaged when dealing with larger data sets and moving data around in those sets. Their disadvantages stem from their lack of built in ordering and memory allocation for collision handling
+Binary trees have the advantage of built in ordering/sorting this lends itself to the quicker search times that it produces and assists in it's dynamic size management as well.
+The disadvantages that it has are that it might be harder to initially produce along with maintaining as if it's not maintained then it's efficiency can degrade.
+Because of it’s many advantages compared to it’s competition I would recommend utilizing a binary tree. 
+It will be able to provide flexibility as data stores change and with the right maintenance it will be able to provide quick and accurate information when indexed. 
