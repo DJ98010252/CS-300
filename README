@@ -1,0 +1,5 @@
+During this course, The focus was selecting and implimenting the best data structures using my own discretion. I learned more about binary trees, hash tables, and linked lists, and their role in enhancing application performance. 
+I approached the challenge of choosing the right strucute by assessing each data structure’s advantages and drawbacks, applying them where I felt they offered the most benefit. 
+When obstacles arose, I turned to official documentation, sought out practical examples, or created simple prototype code to progressively refine logic. 
+Through this course, I gained a deeper understanding of performance considerations, especially through big-O analysis, and recognized a need to strengthen my own recursive problem-solving skills. 
+I feel as if this course has improved how I write maintainable and flexible code by reusing common functions and considering the development of these functions into long term dedicated libraries.
