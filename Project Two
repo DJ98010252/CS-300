@@ -1,0 +1,147 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <algorithm>
+
+using namespace std;
+
+// Course class to hold course information
+class Course {
+public:
+    string courseId;
+    string title;
+    vector<string> prerequisites;
+
+    // Default constructor
+    Course() {}
+
+    // Parameterized constructor
+    Course(string id, string name) {
+        courseId = id;
+        title = name;
+    }
+
+    void addPrerequisite(string prerequisite) {
+        prerequisites.push_back(prerequisite);
+    }
+};
+
+// Function to load hardcoded data into the courses map
+void loadData(map<string, Course>& courses) {
+    // Hardcoded course data
+    Course course1("CSCI100", "Introduction to Computer Science");
+    Course course2("CSCI101", "Introduction to Programming in C++");
+    course2.addPrerequisite("CSCI100");
+
+    Course course3("CSCI200", "Data Structures");
+    course3.addPrerequisite("CSCI101");
+
+    Course course4("CSCI301", "Advanced Programming in C++");
+    course4.addPrerequisite("CSCI101");
+
+    Course course5("CSCI300", "Introduction to Algorithms");
+    course5.addPrerequisite("CSCI200");
+    course5.addPrerequisite("MATH201");
+
+    Course course6("CSCI350", "Operating Systems");
+    course6.addPrerequisite("CSCI300");
+
+    Course course7("CSCI400", "Large Software Development");
+    course7.addPrerequisite("CSCI301");
+    course7.addPrerequisite("CSCI350");
+
+    Course course8("MATH201", "Discrete Mathematics");
+
+    // Insert courses into the map
+    courses[course1.courseId] = course1;
+    courses[course2.courseId] = course2;
+    courses[course3.courseId] = course3;
+    courses[course4.courseId] = course4;
+    courses[course5.courseId] = course5;
+    courses[course6.courseId] = course6;
+    courses[course7.courseId] = course7;
+    courses[course8.courseId] = course8;
+
+    cout << "Data loaded successfully." << endl;
+}
+
+// Function to print all courses in alphanumeric order
+void printAllCourses(const map<string, Course>& courses) {
+    cout << "Here is a sample schedule:" << endl;
+    vector<pair<string, string>> courseList;
+    for (const auto& course : courses) {
+        courseList.push_back({course.first, course.second.title});
+    }
+    sort(courseList.begin(), courseList.end());
+
+    for (const auto& course : courseList) {
+        cout << course.first << ", " << course.second << endl;
+    }
+}
+
+// Function to print information about a specific course
+void printCourseInfo(const map<string, Course>& courses, string courseId) {
+    // Convert input to uppercase to match course IDs in the map
+    transform(courseId.begin(), courseId.end(), courseId.begin(), ::toupper);
+
+    if (courses.find(courseId) == courses.end()) {
+        cout << "Course not found!" << endl;
+        return;
+    }
+
+    Course course = courses.at(courseId);
+    cout << course.courseId << ", " << course.title << endl;
+    cout << "Prerequisites: ";
+    for (size_t i = 0; i < course.prerequisites.size(); ++i) {
+        cout << course.prerequisites[i];
+        if (i < course.prerequisites.size() - 1) cout << ", ";
+    }
+    if (course.prerequisites.empty()) {
+        cout << "None";
+    }
+    cout << endl;
+}
+
+// Function to display the main menu
+void displayMenu() {
+    cout << "1. Load Data Structure." << endl;
+    cout << "2. Print Course List." << endl;
+    cout << "3. Print Course." << endl;
+    cout << "9. Exit" << endl;
+}
+
+int main() {
+    map<string, Course> courses;
+    int choice;
+    string courseId;
+
+    cout << "Welcome to the course planner." << endl;
+
+    do {
+        displayMenu();
+        cout << "What would you like to do? ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                loadData(courses);
+                break;
+            case 2:
+                printAllCourses(courses);
+                break;
+            case 3:
+                cout << "What course do you want to know about? ";
+                cin >> courseId;
+                printCourseInfo(courses, courseId);
+                break;
+            case 9:
+                cout << "Thank you for using the course planner!" << endl;
+                break;
+            default:
+                cout << choice << " is not a valid option." << endl;
+        }
+        cout << endl;
+    } while (choice != 9);
+
+    return 0;
+}
